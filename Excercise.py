@@ -3,7 +3,7 @@ basket = ["Banana", "Apples", "Oranges", "Blueberries"]
 basket.remove("Banana")
 basket.pop()
 basket.append("Kiwi")
-basket.insert(0,"Apples")
+basket.insert(0, "Apples")
 print(basket)
 print(basket.count("Apples"))
 
@@ -18,5 +18,4 @@ print(basket.count("Apples"))
 # 5. Count how many apples in the basket
 
 # 6. empty the basket
-
 
