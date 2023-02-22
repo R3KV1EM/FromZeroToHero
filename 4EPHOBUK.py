@@ -1,16 +1,34 @@
-myset = {4, 5,}
-your_set = {4, 5, 6, 7, 8, 9, 10}
-print(myset.issuperset(your_set))
+import telebot
+from telebot import types
+
+bot = telebot.TeleBot("6210404090:AAFUvNioDXXdzEOHcp71Yz-_YVSoc-WZsio")
+bot.polling(none_stop=True, interval=0)
+@bot.message_handler(commands=['start'])
+def start(message):
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = types.KeyboardButton("👋 Поздороваться")
+    markup.add(btn1)
+    bot.send_message(message.from_user.id, "👋 Привет! Я твой бот-помошник!", reply_markup=markup)
+
+@bot.message_handler(content_types=['text'])
+def get_text_messages(message):
+
+    if message.text == '👋 Поздороваться':
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True) #создание новых кнопок
+        btn1 = types.KeyboardButton('Как стать автором на Хабре?')
+        btn2 = types.KeyboardButton('Правила сайта')
+        btn3 = types.KeyboardButton('Советы по оформлению публикации')
+        markup.add(btn1, btn2, btn3)
+        bot.send_message(message.from_user.id, '❓ Задайте интересующий вас вопрос', reply_markup=markup) #ответ бота
 
 
+    elif message.text == 'Как стать автором на Хабре?':
+        bot.send_message(message.from_user.id, 'Вы пишете первый пост, его проверяют модераторы, и, если всё хорошо, отправляют в основную ленту Хабра, где он набирает просмотры, комментарии и рейтинг. В дальнейшем премодерация уже не понадобится. Если с постом что-то не так, вас попросят его доработать.\n \nПолный текст можно прочитать по ' + '[ссылке](https://habr.com/ru/sandbox/start/)', parse_mode='Markdown')
 
+    elif message.text == 'Правила сайта':
+        bot.send_message(message.from_user.id, 'Прочитать правила сайта вы можете по ' + '[ссылке](https://habr.com/ru/docs/help/rules/)', parse_mode='Markdown')
 
+    elif message.text == 'Советы по оформлению публикации':
+        bot.send_message(message.from_user.id, 'Подробно про советы по оформлению публикаций прочитать по ' + '[ссылке](https://habr.com/ru/docs/companies/design/)', parse_mode='Markdown')
 
-#.difference() print(myset.difference(your_set))Сравнивает первый сет со вторым. Отображает несовпадения первого сета
-# .discard() Удаляет из сета указанное значение myset.discard(5) ВОЗВРАЩАЕТ None нужно принить на новой строке!!
-# .dfference_update() Сравнивает два сета, удаляет совпадения из первого сета, возвращает None
-# .intersection() print(myset.intersection(your_set)) показывает пересечения 1 СЕТА в сравнении со вторым можно методом (myset & your_set)
-# .isdisjoint() Сравнивает два сета на совпадения, возвращает True если 1 сет не имеет общих данных со вторым
-# .issubset() print(myset.issubset(your_set)) Спрашивает сет 1 это часть сета 2? Возвращает булево. True если 1 set полностью содержится в сет 2
-# .issuperset() print(myset.issuperset(your_set)) Спрашивает сет 1 это суперсет сета 2? Возвратит True в случае если сет 1 полностью содержит в себе сет 2
-# .union() Связывает два сета между собой и удаляет повторяющиеся данные print(myset | your_set) или myset.union(your_set)
